@@ -1,4 +1,4 @@
--- Rentals Table: Created by Sarah
+-- Rentals Table: Created by Sarah (Fixed error)
 CREATE TABLE Rentals (
   RentalNum INT PRIMARY KEY,                -- Unique rental record number
   RentalType VARCHAR(50),                   -- Type (Short-term, Long-term, etc.)
@@ -7,9 +7,11 @@ CREATE TABLE Rentals (
   RentalDue DATE,                           -- Due date for return
   DeviceID VARCHAR(50),                     -- FK: Device.SerialNo
   StudentID INT,                            -- FK: StudentInfo.StudentID
+
   FOREIGN KEY (DeviceID) REFERENCES Device(SerialNo),
   FOREIGN KEY (StudentID) REFERENCES StudentInfo(StudentID)
 );
+
 
 -- Inserting 10 sample rows
 INSERT INTO Rentals (RentalNum, RentalType, RentalDate, RentalTime, RentalDue, DeviceID, StudentID)
