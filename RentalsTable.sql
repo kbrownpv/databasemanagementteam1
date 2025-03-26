@@ -1,3 +1,4 @@
+-- SARAH LAMAR
 CREATE TABLE Rentals (
     rental_id INT PRIMARY KEY AUTO_INCREMENT,  -- Unique identifier for each rental record
     device_id INT,                             -- ID of the device being rented
