@@ -8,7 +8,9 @@ CREATE TABLE Rentals (
     is_returned BOOLEAN DEFAULT FALSE,         -- Flag indicating whether the device has been returned (default is false)
     rental_status VARCHAR(50) NOT NULL,        -- Current status of the rental (e.g., 'Pending', 'Completed')
     comments VARCHAR(255) NULL,                -- Additional comments about the rental (nullable)
-    notes VARCHAR(500) NULL,                   -- Optional additional notes (nullable, up to 500 characters)
+    notes VARCHAR(500) NULL,   -- Optional additional notes (nullable, up to 500 characters)
+
+    
     FOREIGN KEY (device_id) REFERENCES Devices(device_id),  -- Link to the Devices table
     FOREIGN KEY (user_id) REFERENCES Users(user_id)         -- Link to the Users table
 );
