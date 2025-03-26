@@ -1,8 +1,8 @@
 -- Brandon Nobles- Overdue & Security Tracking Table
 
 CREATE TABLE OverdueSecurityTracking (
-    user_id INT PRIMARY KEY,
-    user_fname VARCHAR(50) NOT NULL,
+    user_id INT PRIMARY KEY, -- User ID
+    user_fname VARCHAR(50) NOT NULL, -- User First Name
     user_loc VARCHAR(100),
     device_loc VARCHAR(100),
     last_loc VARCHAR(100),
