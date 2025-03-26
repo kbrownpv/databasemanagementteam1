@@ -1,4 +1,4 @@
--- StudentInfo Table: Created by You
+-- StudentInfo Table: Created by Kendall
 CREATE TABLE StudentInfo (
   StudentID INT PRIMARY KEY,                -- Unique student ID
   StudentName VARCHAR(100) NOT NULL,          -- Full name of student
