@@ -1,4 +1,6 @@
 -- Payments Table: Created by Karrington
+-- This table stores payment information for students and faculty.
+
 CREATE TABLE Payments (
   PaymentID INT PRIMARY KEY,                -- Unique payment ID
   PaymentLoc VARCHAR(100),                  -- Location where payment was made
@@ -8,7 +10,8 @@ CREATE TABLE Payments (
   PaymentTime TIME,                         -- Time of payment
   TotalPaid DECIMAL(6,2),                   -- Amount paid
   RemainingBal DECIMAL(6,2),                -- Balance remaining
-  FOREIGN KEY (DeviceID) REFERENCES Device(SerialNo)
+  FOREIGN KEY (DeviceID) REFERENCES Device(SerialNo),
+  CHECK (RemainingBal >= 0)                 -- Check constraint: balance must be non-negative
 );
 
 -- Inserting 10 sample rows
@@ -24,3 +27,48 @@ VALUES
 (3008, 'Online',     1008, 'SN1010', '2025-03-17', '16:00:00', 45.00,  0.00),
 (3009, 'Front Desk', 1010, 'SN1008', '2025-03-18', '17:00:00', 55.00,  5.00),
 (3010, 'Online',     1009, 'SN1004', '2025-03-19', '18:00:00', 30.00,  0.00);
+
+
+-- JOIN QUERY: Total Paid Per Student
+-- Query joins the Payments table with the StudentInfo table to display each
+-- student's name and the total amount they've paid so far.
+SELECT 
+  s.studentID,
+  s.firstName,
+  s.lastName,
+  SUM(p.TotalPaid) AS TotalPaid
+FROM 
+  Payments p
+JOIN 
+  StudentInfo s ON p.UserID = s.studentID
+GROUP BY 
+  s.studentID, s.firstName, s.lastName;
+
+
+-- PAYMENT LOG TABLE: To be used with a trigger to track new payment entries
+CREATE TABLE PaymentLog (
+  LogID INT AUTO_INCREMENT PRIMARY KEY,     -- Unique log entry ID
+  PaymentID INT,                            -- Payment ID being logged
+  LogDate DATETIME,                         -- Date and time of the log
+  LogNote VARCHAR(255)                      -- Descriptive note about the payment
+);
+
+
+-- TRIGGER: Log New Payments
+-- Automatically logs every new payment inserted into the Payments table
+
+DELIMITER $$
+
+CREATE TRIGGER log_new_payment
+AFTER INSERT ON Payments
+FOR EACH ROW
+BEGIN
+  INSERT INTO PaymentLog (PaymentID, LogDate, LogNote)
+  VALUES (
+    NEW.PaymentID,
+    NOW(),
+    CONCAT('New payment of $', NEW.TotalPaid, ' added for User ', NEW.UserID)
+  );
+END$$
+
+DELIMITER ;
