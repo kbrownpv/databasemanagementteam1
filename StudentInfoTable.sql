@@ -1,7 +1,8 @@
 -- StudentInfo Table: Created by Kendall
 CREATE TABLE StudentInfo (
   StudentID INT PRIMARY KEY,                -- Unique student ID
-  StudentName VARCHAR(100) NOT NULL,          -- Full name of student
+  FirstName VARCHAR(50) NOT NULL,           --First name of Student
+  LastName VARCHAR(50) NOT NULL,            --Last name of Student
   StudentBal DECIMAL(6,2) DEFAULT 0.00,         -- Current account balance
   AdminComments TEXT,                         -- Comments by admin
   OutstandingBal DECIMAL(6,2) DEFAULT 0.00,     -- Overdue amount
