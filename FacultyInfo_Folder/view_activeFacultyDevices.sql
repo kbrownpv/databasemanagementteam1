@@ -1,4 +1,4 @@
--- Create a view showing all active faculty and their assigned devices
+-- a view showing all active faculty and their assigned devices
 CREATE VIEW ActiveFacultyDevices AS
 SELECT 
     FacultyID,
