@@ -41,21 +41,3 @@ VALUES
 (4009, 'Long-term',  '2025-03-09', '16:00:00', '2025-03-19', 'SN1004', 1009),
 (4010, 'Short-term', '2025-03-10', '17:00:00', '2025-03-14', 'SN1008', 1010);
 
--- Trigger: Limit students to 3 active rentals (not yet returned)
-DELIMITER //
-CREATE TRIGGER LimitStudentRentals
-BEFORE INSERT ON Rentals
-FOR EACH ROW
-BEGIN
-  DECLARE rental_count INT;
-  SELECT COUNT(*) INTO rental_count
-  FROM Rentals
-  WHERE StudentID = NEW.StudentID AND ReturnDate IS NULL;
-
-  IF rental_count >= 3 THEN
-    SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = 'Student cannot rent more than 3 devices at a time.';
-  END IF;
-END;
-//
-DELIMITER ;
