@@ -29,21 +29,6 @@ VALUES
 (3010, 'Online',     1009, 'SN1004', '2025-03-19', '18:00:00', 30.00,  0.00);
 
 
--- JOIN QUERY: Total Paid Per Student
--- Query joins the Payments table with the StudentInfo table to display each
--- student's name and the total amount they've paid so far.
-SELECT 
-  s.studentID,
-  s.firstName,
-  s.lastName,
-  SUM(p.TotalPaid) AS TotalPaid
-FROM 
-  Payments p
-JOIN 
-  StudentInfo s ON p.UserID = s.studentID
-GROUP BY 
-  s.studentID, s.firstName, s.lastName;
-
 
 -- PAYMENT LOG TABLE: To be used with a trigger to track new payment entries
 CREATE TABLE PaymentLog (
