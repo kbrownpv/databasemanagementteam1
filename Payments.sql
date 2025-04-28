@@ -38,4 +38,19 @@ CREATE TABLE PaymentLog (
   LogNote VARCHAR(255)                      -- Descriptive note about the payment
 );
 
+-- Sample Data for Payment Log Table
+INSERT INTO PaymentLog (PaymentID, LogDate, LogNote)
+VALUES
+  (3001, '2025-04-01 09:15:00', 'New payment of $50 added for User 1001'),
+  (3002, '2025-04-01 10:05:00', 'New payment of $30 added for User 1002'),
+  (3003, '2025-04-02 08:45:00', 'New payment of $40 added for User 1003'),
+  (3004, '2025-04-02 11:30:00', 'New payment of $20 added for User 1004'),
+  (3005, '2025-04-03 12:20:00', 'New payment of $60 added for User 1005'),
+  (3006, '2025-04-03 14:00:00', 'New payment of $25 added for User 1006'),
+  (3007, '2025-04-04 09:40:00', 'New payment of $35 added for User 1007'),
+  (3008, '2025-04-04 15:25:00', 'New payment of $45 added for User 1008'),
+  (3009, '2025-04-05 10:55:00', 'New payment of $55 added for User 1009'),
+  (3010, '2025-04-05 16:10:00', 'New payment of $30 added for User 1010');
+
+
 
